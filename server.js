@@ -62,4 +62,8 @@ app.delete('/api/games/:id',admin,async(req,res)=>{
 });
 
 app.use((req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
-app.listen(process.env.PORT||3000,()=>console.log('VANTA GAMES online'));
+const port = Number(process.env.PORT) || 10000;
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(`VANTA GAMES online on port ${port}`);
+});
