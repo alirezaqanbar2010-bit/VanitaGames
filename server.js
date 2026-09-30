@@ -30,10 +30,8 @@ async function putFile(file){
   return supabase.storage.from('games').getPublicUrl(key).data.publicUrl;
 }
 
-app.get('/api/games',async(req,res)=>{
-  const {data,error}=await supabase.from('games').select('*,game_images(*)').order('created_at',{ascending:false});
-  if(error)return res.status(500).json({error:error.message});
-  res.json(data);
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.post('/api/games',admin,upload.fields([
